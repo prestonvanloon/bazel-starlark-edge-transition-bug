@@ -1,0 +1,21 @@
+load(":defs.bzl", "line_length_test")
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+
+string_flag(
+    name = "foo",
+    build_setting_default = "",
+    visibility = ["//visibility:public"],
+)
+
+line_length_test(
+    name = "80columns",
+    srcs = glob(["data/**"]),
+    columns = 80,
+)
+
+line_length_test(
+    name = "80columns_with_transition",
+    srcs = glob(["data/**"]),
+    columns = 80,
+    foo = "bar",
+)
